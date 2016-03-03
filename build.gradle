@@ -91,21 +91,21 @@ uploadArchives {
         }
         dependencies {
             dependency {
-                compile 'com.eaglesakura'
+                groupId 'com.eaglesakura'
                 artifactId = 'simple-logger'
                 version = '1.1.+'
                 scope = 'compile'
             }
 
             dependency {
-                compile 'com.eaglesakura'
+                groupId 'com.eaglesakura'
                 artifactId = 'simple-utils'
                 version = '1.1.+'
                 scope = 'compile'
             }
 
             dependency {
-                compile 'com.eaglesakura'
+                groupId 'com.eaglesakura'
                 artifactId = 'gradle-plugin-utils'
                 version = '1.0.+'
                 scope = 'compile'
