@@ -24,3 +24,4 @@ latex/
 # 必要に応じてsyncする
 ace-private/
 eglibrary/
+dependencies.txt
