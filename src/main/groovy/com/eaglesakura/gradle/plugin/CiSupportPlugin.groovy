@@ -1,16 +1,16 @@
-package com.eaglesakura.gradle.plugins
+package com.eaglesakura.gradle.plugin
 
-import com.eaglesakura.gradle.tasks.AndroidCiCleanTask
 import com.eaglesakura.gradle.tasks.AndroidCiCollectTask
-import com.eaglesakura.gradle.tasks.AndroidLocalPropertiesGenTask
+import com.eaglesakura.gradle.tasks.CiCleanTask
 import com.eaglesakura.util.StringUtil
+import org.apache.commons.codec.binary.Base64
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
 /**
  * Androidアプリ開発用のサポートタスク
  */
-public class AndroidSupportPlugin implements Plugin<Project> {
+public class CiSupportPlugin implements Plugin<Project> {
     void apply(Project target) {
 //        println("AndroidSupportPlugin apply!")
         target.extensions.create("eglibrary", ExtensionEglibrary);
@@ -42,9 +42,8 @@ public class AndroidSupportPlugin implements Plugin<Project> {
         }
 
         // 規定のタスクを追加
-        target.task('genLocalProperties', type: AndroidLocalPropertiesGenTask)
-        target.task('ciCollect', type: AndroidCiCollectTask)
-        target.task('ciClean', type: AndroidCiCleanTask)
+        target.task('ciCollectAndroidApps', type: AndroidCiCollectTask)
+        target.task('ciClean', type: CiCleanTask)
     }
 
     /**

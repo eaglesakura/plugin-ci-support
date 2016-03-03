@@ -4,7 +4,7 @@ import com.eaglesakura.tool.log.Logger
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
 
-public class AndroidCiCleanTask extends DefaultTask {
+public class CiCleanTask extends DefaultTask {
 
     @TaskAction
     def onExecute() {

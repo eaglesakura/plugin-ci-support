@@ -32,10 +32,16 @@ dependencies {
     if (EGLIBRARY_COMPILE_LOCAL) {
         compile project(':eglibrary:simple-logger')
         compile project(':eglibrary:simple-utils')
+        compile project(':eglibrary:gradle-plugin-utils')
     } else {
-        compile 'com.eaglesakura:simple-logger:1.+'
-        compile 'com.eaglesakura:simple-utils:1.+'
+        compile 'com.eaglesakura:simple-logger:1.1.+'
+        compile 'com.eaglesakura:simple-utils:1.1.+'
+        compile 'com.eaglesakura:gradle-plugin-utils:1.0.+'
     }
+
+    compile 'commons-codec:commons-codec:1.10'
+    // UnitTest
+    testCompile 'junit:junit:4.12'
 }
 
 apply plugin: 'maven'
@@ -81,6 +87,35 @@ uploadArchives {
             license {
                 name 'MIT License'
                 url 'https://raw.githubusercontent.com/eaglesakura/eglibrary/master/LICENSE-MIT.txt'
+            }
+        }
+        dependencies {
+            dependency {
+                compile 'com.eaglesakura'
+                artifactId = 'simple-logger'
+                version = '1.1.+'
+                scope = 'compile'
+            }
+
+            dependency {
+                compile 'com.eaglesakura'
+                artifactId = 'simple-utils'
+                version = '1.1.+'
+                scope = 'compile'
+            }
+
+            dependency {
+                compile 'com.eaglesakura'
+                artifactId = 'gradle-plugin-utils'
+                version = '1.0.+'
+                scope = 'compile'
+            }
+
+            dependency {
+                groupId = 'commons-codec'
+                artifactId = 'commons-codec'
+                version = '1.10'
+                scope = 'compile'
             }
         }
     }
