@@ -1,9 +1,8 @@
 package com.eaglesakura.gradle.plugin
 
-import com.eaglesakura.gradle.tasks.AndroidCiCollectTask
-import com.eaglesakura.gradle.tasks.CiCleanTask
+import com.eaglesakura.gradle.task.AndroidCiCollectTask
+import com.eaglesakura.gradle.task.CiCleanTask
 import com.eaglesakura.util.StringUtil
-import org.apache.commons.codec.binary.Base64
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
