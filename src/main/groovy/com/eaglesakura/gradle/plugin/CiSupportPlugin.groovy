@@ -1,9 +1,9 @@
 package com.eaglesakura.gradle.plugin
 
-import com.eaglesakura.gradle.tasks.AndroidCiCollectTask
-import com.eaglesakura.gradle.tasks.CiCleanTask
+import com.eaglesakura.gradle.helper.Maven
+import com.eaglesakura.gradle.task.AndroidCiCollectTask
+import com.eaglesakura.gradle.task.CiCleanTask
 import com.eaglesakura.util.StringUtil
-import org.apache.commons.codec.binary.Base64
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
@@ -57,7 +57,15 @@ public class CiSupportPlugin implements Plugin<Project> {
      * Jenkins等のCI環境を構築する
      */
     public static class ExtensionCi {
+        /**
+         * 成果物を格納する標準ディレクトリ
+         */
         File releaseDir = new File("ci-release").absoluteFile;
+
+        /**
+         * Mavenのアップロード先ディレクトリｓ
+         */
+        File mavenDir = Maven.getArtifacts();
 
         /**
          * CI(Jenkins)上で実行されていればtrue

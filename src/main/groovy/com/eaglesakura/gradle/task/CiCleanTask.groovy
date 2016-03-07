@@ -1,4 +1,4 @@
-package com.eaglesakura.gradle.tasks
+package com.eaglesakura.gradle.task
 
 import com.eaglesakura.tool.log.Logger
 import org.gradle.api.DefaultTask
