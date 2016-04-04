@@ -42,8 +42,13 @@ public class CiSupportPlugin implements Plugin<Project> {
         }
 
         // 規定のタスクを追加
-        target.task('ciCollectAndroidApps', type: AndroidCiCollectTask)
-        target.task('ciClean', type: CiCleanTask)
+        def ciCollectAndroidApps = target.task('ciCollectAndroidApps', type: AndroidCiCollectTask)
+        ciCollectAndroidApps.setDescription("Collect android assemble files");
+        ciCollectAndroidApps.setGroup("Android CI");
+
+        def ciClean = target.task('ciClean', type: CiCleanTask)
+        ciClean.setDescription("Delete android assemble files");
+        ciClean.setGroup("Android CI");
     }
 
     /**
