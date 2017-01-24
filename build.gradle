@@ -1,13 +1,17 @@
 /**
  * 1.0.x  : release
+ * 1.1.x  : Support GooglePlay Publish
  */
-def ARTIFACT_VERSION = "1.0"
+def ARTIFACT_VERSION = "1.1"
 def ARTIFACT_NAME = file(".").absoluteFile.name
 def ARTIFACT_INSTALL_TARGET = getArtifactInstallTarget()
 apply plugin: 'groovy'
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
+
+def GOOGLEPLAY_PUBLISH_LIBRARY_VERSION = "v2-rev18-1.19.0"
+def GOOGLEOAUTH_CLIENT_VERSION = "1.19.0"
 
 // Local or maven
 if (!hasProperty("EGLIBRARY_COMPILE_LOCAL")) {
@@ -40,6 +44,13 @@ dependencies {
     }
 
     compile 'commons-codec:commons-codec:1.10'
+
+    /**
+     * GooglePlay Deploy
+     */
+    compile "com.google.apis:google-api-services-androidpublisher:${GOOGLEPLAY_PUBLISH_LIBRARY_VERSION}"
+    compile "com.google.oauth-client:google-oauth-client-java6:${GOOGLEOAUTH_CLIENT_VERSION}"
+
     // UnitTest
     testCompile 'junit:junit:4.12'
 }
@@ -107,7 +118,7 @@ uploadArchives {
             dependency {
                 groupId 'com.eaglesakura'
                 artifactId = 'gradle-plugin-utils'
-                version = dependenceisVersion("com.eaglesakura:gradle-plugin-utils",  "1.+")
+                version = dependenceisVersion("com.eaglesakura:gradle-plugin-utils", "1.+")
                 scope = 'compile'
             }
 
@@ -115,6 +126,20 @@ uploadArchives {
                 groupId = 'commons-codec'
                 artifactId = 'commons-codec'
                 version = '1.10'
+                scope = 'compile'
+            }
+
+            dependency {
+                groupId 'com.google.apis'
+                artifactId = 'google-api-services-androidpublisher'
+                version = dependenceisVersion("com.google.apis:google-api-services-androidpublisher", GOOGLEOAUTH_CLIENT_VERSION)
+                scope = 'compile'
+            }
+
+            dependency {
+                groupId 'com.google.oauth-client'
+                artifactId = 'google-oauth-client-java6'
+                version = dependenceisVersion("com.google.oauth-client:google-oauth-client-java6", GOOGLEOAUTH_CLIENT_VERSION)
                 scope = 'compile'
             }
         }
