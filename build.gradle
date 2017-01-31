@@ -132,7 +132,7 @@ uploadArchives {
             dependency {
                 groupId 'com.google.apis'
                 artifactId = 'google-api-services-androidpublisher'
-                version = dependenceisVersion("com.google.apis:google-api-services-androidpublisher", GOOGLEOAUTH_CLIENT_VERSION)
+                version = dependenceisVersion("com.google.apis:google-api-services-androidpublisher", GOOGLEPLAY_PUBLISH_LIBRARY_VERSION)
                 scope = 'compile'
             }
 
