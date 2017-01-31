@@ -104,21 +104,21 @@ uploadArchives {
             dependency {
                 groupId 'com.eaglesakura'
                 artifactId = 'simple-logger'
-                version = dependenceisVersion("com.eaglesakura:simple-logger", "1.+")
+                version = dependenciesVersion("com.eaglesakura:simple-logger", "1.+")
                 scope = 'compile'
             }
 
             dependency {
                 groupId 'com.eaglesakura'
                 artifactId = 'simple-utils'
-                version = dependenceisVersion("com.eaglesakura:simple-utils", "1.+")
+                version = dependenciesVersion("com.eaglesakura:simple-utils", "1.+")
                 scope = 'compile'
             }
 
             dependency {
                 groupId 'com.eaglesakura'
                 artifactId = 'gradle-plugin-utils'
-                version = dependenceisVersion("com.eaglesakura:gradle-plugin-utils", "1.+")
+                version = dependenciesVersion("com.eaglesakura:gradle-plugin-utils", "1.+")
                 scope = 'compile'
             }
 
@@ -132,14 +132,14 @@ uploadArchives {
             dependency {
                 groupId 'com.google.apis'
                 artifactId = 'google-api-services-androidpublisher'
-                version = dependenceisVersion("com.google.apis:google-api-services-androidpublisher", GOOGLEPLAY_PUBLISH_LIBRARY_VERSION)
+                version = dependenciesVersion("com.google.apis:google-api-services-androidpublisher", GOOGLEPLAY_PUBLISH_LIBRARY_VERSION)
                 scope = 'compile'
             }
 
             dependency {
                 groupId 'com.google.oauth-client'
                 artifactId = 'google-oauth-client-java6'
-                version = dependenceisVersion("com.google.oauth-client:google-oauth-client-java6", GOOGLEOAUTH_CLIENT_VERSION)
+                version = dependenciesVersion("com.google.oauth-client:google-oauth-client-java6", GOOGLEOAUTH_CLIENT_VERSION)
                 scope = 'compile'
             }
         }
@@ -158,7 +158,7 @@ task uploadGroovydoc << {
 /**
  * 依存している固定ライブラリバージョンを取得する
  */
-String dependenceisVersion(String libName, String defVersion) {
+String dependenciesVersion(String libName, String defVersion) {
     def lines = [];
     def target = file("dependencies.txt");
     if (!target.file) {
