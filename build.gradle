@@ -10,8 +10,8 @@ apply plugin: 'groovy'
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
-def GOOGLEPLAY_PUBLISH_LIBRARY_VERSION = "v2-rev18-1.19.+"
-def GOOGLEOAUTH_CLIENT_VERSION = "1.19.+"
+def GOOGLEPLAY_PUBLISH_LIBRARY_VERSION = "v2-rev40-1.22.+"
+def GOOGLEOAUTH_CLIENT_VERSION = "1.22.+"
 
 // Local or maven
 if (!hasProperty("EGLIBRARY_COMPILE_LOCAL")) {
