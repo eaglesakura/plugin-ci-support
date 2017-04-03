@@ -49,7 +49,7 @@ dependencies {
     if (EGLIBRARY_COMPILE_LOCAL) {
         compile project(':eglibrary:gradle-plugin-utils')
     } else {
-        compile "com.eaglesakura:gradle-plugin-utils:1.1.404"
+        compile "com.eaglesakura:gradle-plugin-utils:1.1.405"
     }
 
     compile 'commons-codec:commons-codec:1.10'
