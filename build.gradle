@@ -2,8 +2,10 @@
  * 1.0.x  : release
  * 1.1.x  : Support GooglePlay Publish
  * 1.2.x  : bintrayに移行
+ * 1.3.x  : Changed auto versioning algorithm.
  */
-def ARTIFACT_VERSION = "1.2"
+def ARTIFACT_VERSION = System.env.CIRCLE_TAG == null ?
+        "1.3" : System.env.CIRCLE_TAG.substring(System.env.CIRCLE_TAG.indexOf('v') + 1)
 def REPOSITORY_NAME = "maven"
 def BINTRAY_LICENSES = ["MIT"]
 def BINTRAY_LABELS = ["android", "plugin"]
@@ -32,8 +34,8 @@ if (!hasProperty("EGLIBRARY_COMPILE_LOCAL")) {
 }
 
 repositories {
+    maven { url "https://jcenter.bintray.com" }
     mavenCentral()
-    maven { url "https://dl.bintray.com/eaglesakura/maven/" }
 }
 
 configurations {
