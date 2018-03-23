@@ -1,7 +1,6 @@
 package com.eaglesakura.gradle.task
 
 import com.eaglesakura.gradle.googleplay.GooglePlayConsoleManager
-import com.eaglesakura.tool.log.Logger
 import com.eaglesakura.util.IOUtil
 import com.eaglesakura.util.StringUtil
 import org.gradle.api.DefaultTask
@@ -12,17 +11,17 @@ import org.gradle.api.tasks.TaskAction
  *
  * アップロードは必ずServiceAccountを通して行う。
  */
-public class AndroidGooglePlayPublishTask extends DefaultTask {
+class AndroidGooglePlayPublishTask extends DefaultTask {
 
-    File p12;
+    File p12
 
-    File apk;
+    File apk
 
-    String applicationId;
+    String applicationId
 
-    String serviceAccountEmail;
+    String serviceAccountEmail
 
-    String track;
+    String track
 
     /**
      * listings
@@ -30,13 +29,13 @@ public class AndroidGooglePlayPublishTask extends DefaultTask {
      *   * ja-JP/fullDescription.txt
      *   * ja-JP/shortDescription.txt
      */
-    File listings;
+    File listings
 
     /**
      * apk update Listings
      *  * ja-JP/apk.txt
      */
-    File apkListings;
+    File apkListings
 
 
     protected GooglePlayConsoleManager googlePlayConsoleManager;
@@ -55,19 +54,19 @@ public class AndroidGooglePlayPublishTask extends DefaultTask {
 
     @TaskAction
     def onExecute() {
-        Logger.out "applicationId       : ${applicationId}"
-        Logger.out "track               : ${track}"
-        Logger.out "listings            : ${listings}"
-        Logger.out "apk                 : ${apk}"
-        Logger.out "apklistings         : ${apkListings}"
-        Logger.out "serviceAccountEmail : ${serviceAccountEmail}"
+        println "applicationId       : ${applicationId}"
+        println "track               : ${track}"
+        println "listings            : ${listings}"
+        println "apk                 : ${apk}"
+        println "apklistings         : ${apkListings}"
+        println "serviceAccountEmail : ${serviceAccountEmail}"
 
-        googlePlayConsoleManager = new GooglePlayConsoleManager();
-        googlePlayConsoleManager.p12 = p12;
-        googlePlayConsoleManager.apk = apk;
-        googlePlayConsoleManager.applicationId = applicationId;
-        googlePlayConsoleManager.serviceAccountEmail = serviceAccountEmail;
+        googlePlayConsoleManager = new GooglePlayConsoleManager()
+        googlePlayConsoleManager.p12 = p12
+        googlePlayConsoleManager.apk = apk
+        googlePlayConsoleManager.applicationId = applicationId
+        googlePlayConsoleManager.serviceAccountEmail = serviceAccountEmail
 
-        onGooglePayTask();
+        onGooglePayTask()
     }
 }

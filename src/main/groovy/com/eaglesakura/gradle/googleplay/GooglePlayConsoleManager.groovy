@@ -1,6 +1,5 @@
 package com.eaglesakura.gradle.googleplay
 
-import com.eaglesakura.tool.log.Logger
 import com.eaglesakura.util.IOUtil
 import com.eaglesakura.util.StringUtil
 import com.google.api.client.http.AbstractInputStreamContent
@@ -18,16 +17,16 @@ import com.google.play.developerapi.samples.AndroidPublisherHelper
  *
  * https://github.com/googlesamples/android-play-publisher-api/tree/master/v2/java
  */
-public class GooglePlayConsoleManager {
-    File p12;
+class GooglePlayConsoleManager {
+    File p12
 
-    File apk;
+    File apk
 
-    String applicationId;
+    String applicationId
 
-    String serviceAccountEmail;
+    String serviceAccountEmail
 
-    private AndroidPublisher service;
+    private AndroidPublisher service
 
 
     private Listing newListing(File lang) {
@@ -70,7 +69,7 @@ public class GooglePlayConsoleManager {
     /**
      * アプリの内容を更新させる
      */
-    public void updateListings(File listings) {
+    void updateListings(File listings) {
         if (!IOUtil.isDirectory(listings)) {
             throw new IllegalArgumentException("task.listings Error");
         }
@@ -81,11 +80,11 @@ public class GooglePlayConsoleManager {
         AndroidPublisher.Edits.Insert editRequest = edits.insert(applicationId, null /** no content */);
         AppEdit edit = editRequest.execute();
         final String editId = edit.getId();
-        Logger.out("Created edit with id: %s", editId);
+        println("Created edit with id: %s", editId);
 
 
         for (def lang : listings.listFiles()) {
-            Logger.out("dir : ${lang.absolutePath}")
+            println("dir : ${lang.absolutePath}")
 
             def updatedListing = edits.listings().update(applicationId, editId, lang.name, newListing(lang)).execute();
 
@@ -102,7 +101,7 @@ public class GooglePlayConsoleManager {
                 def imageType = IMAGE_TABLE.get(i).get(1);
                 def directory = new File(lang, dirName);
                 if (IOUtil.isDirectory(directory)) {
-                    Logger.out("upload type(${imageType})")
+                    println("upload type(${imageType})")
                     edits.images().deleteall(applicationId, editId, lang.name, imageType).execute();
                     uploadImages(directory, editId, lang.name, imageType, edits.images());
                 }
@@ -119,26 +118,26 @@ public class GooglePlayConsoleManager {
                 def png = (File) IMAGE_SINGLE_TABLE.get(i).get(0);
                 def imageType = IMAGE_SINGLE_TABLE.get(i).get(1).toString();
                 if (IOUtil.isFile(png)) {
-                    Logger.out("upload type(${imageType})")
+                    println("upload type(${imageType})")
                     edits.images().deleteall(applicationId, editId, lang.name, imageType).execute();
                     edits.images().upload(applicationId, editId, lang.name, imageType, new FileContent(AndroidPublisherHelper.MIME_TYPE_PNG, png)).execute();
                 }
             }
 
 
-            Logger.out("Update ${lang.name} listing with title: ${updatedListing.getTitle()}");
+            println("Update ${lang.name} listing with title: ${updatedListing.getTitle()}");
         }
 
         // Commit changes for edit.
         def commitRequest = edits.commit(applicationId, editId);
         def appEdit = commitRequest.execute();
-        Logger.out("App edit with id ${appEdit.getId()} has been comitted");
+        println("App edit with id ${appEdit.getId()} has been comitted");
     }
 
     /**
      * 新しいAPKを指定されたトラックへアップロードする
      */
-    public void uploadApk(String track, File apkListings) {
+    void uploadApk(String track, File apkListings) {
         if (StringUtil.isEmpty(track)) {
             throw new IllegalArgumentException("task.track Error");
         }
@@ -153,13 +152,13 @@ public class GooglePlayConsoleManager {
         AndroidPublisher.Edits.Insert editRequest = edits.insert(applicationId, null /** no content */);
         AppEdit edit = editRequest.execute();
         final String editId = edit.getId();
-        Logger.out("Created edit with id: ${editId}");
+        println("Created edit with id: ${editId}");
 
         // アップロードを行う
         final AbstractInputStreamContent apkFile = new FileContent(AndroidPublisherHelper.MIME_TYPE_APK, apk);
         def uploadRequest = edits.apks().upload(applicationId, editId, apkFile);
         def apk = uploadRequest.execute();
-        Logger.out("Version code ${apk.getVersionCode()} has been uploaded");
+        println("Version code ${apk.getVersionCode()} has been uploaded");
 
         // 指定したトラック(alpha/beta/production/rollout)へ移行する
         AndroidPublisher.Edits.Tracks.Update updateTrackRequest = edits
@@ -167,7 +166,7 @@ public class GooglePlayConsoleManager {
                 .update(applicationId, editId, track, new Track().setVersionCodes(Arrays.asList(apk.getVersionCode()))
         );
         def updatedTrack = updateTrackRequest.execute();
-        Logger.out("Track ${updatedTrack.getTrack()} has been updated.");
+        println("Track ${updatedTrack.getTrack()} has been updated.");
 
         // upload listings
         if (apkListings != null) {
@@ -187,7 +186,7 @@ public class GooglePlayConsoleManager {
         // Commit changes for edit.
         def commitRequest = edits.commit(applicationId, editId);
         def appEdit = commitRequest.execute();
-        Logger.out("App edit with id ${appEdit.getId()} has been committed");
+        println("App edit with id ${appEdit.getId()} has been committed");
     }
 
     /**
