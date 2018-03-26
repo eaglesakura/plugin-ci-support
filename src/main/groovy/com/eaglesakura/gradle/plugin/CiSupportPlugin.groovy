@@ -19,7 +19,7 @@ class CiSupportPlugin implements Plugin<Project> {
 
         // Jenkins以外から実行されている場合、適当な設定を行う
         if (!StringUtil.isEmpty(System.getenv("BUILD_NUMBER"))) {
-            println("Build Jenkins")
+//            println("Build Jenkins")
             target.eglibrary.ci.ciRunning = true
             target.eglibrary.ci.buildVersionCode = System.getenv("BUILD_NUMBER")
             target.eglibrary.ci.buildDate = System.getenv("BUILD_ID")
@@ -27,14 +27,14 @@ class CiSupportPlugin implements Plugin<Project> {
             target.eglibrary.ci.ciType = "Jenkins"
 
         } else if (!StringUtil.isEmpty(System.getenv("CIRCLE_BUILD_NUM"))) {
-            println("Build CircleCI")
+//            println("Build CircleCI")
             target.eglibrary.ci.ciRunning = true
             target.eglibrary.ci.buildVersionCode = System.getenv("CIRCLE_BUILD_NUM")
             target.eglibrary.ci.buildDate = NOW_DATE_STRING
             target.eglibrary.ci.buildVersionName = "ci.${target.eglibrary.ci.buildVersionCode}"
             target.eglibrary.ci.ciType = "CircleCI"
         } else {
-            println("Build Local")
+//            println("Build Local")
             target.eglibrary.ci.ciRunning = false
             target.eglibrary.ci.buildVersionCode = "1"
             target.eglibrary.ci.buildDate = NOW_DATE_STRING
